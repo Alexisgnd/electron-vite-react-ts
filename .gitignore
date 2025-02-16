@@ -1,0 +1,34 @@
+# Logs
+*.log
+
+# Node Modules
+node_modules/
+
+# Dossier de build de Vite
+dist/
+
+# Dossier de build Electron Builder
+release/
+
+# Vite cache (optionnel)
+.vite/
+
+# Dossiers/exports de coverage (tests)
+coverage/
+.nyc_output/
+
+# Environnement/Configuration locale
+.env
+*.local
+
+# IDE/Editor config
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# macOS/Windows Files
+.DS_Store
+Thumbs.db
