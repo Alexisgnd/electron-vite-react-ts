@@ -11,8 +11,13 @@ function createWindow() {
     },
   });
 
-  // Chemin vers la page HTML
-  mainWindow.loadFile(path.join(__dirname, 'dist', 'index.html'));
+  // Vérification : si on est en mode dev, on charge le serveur Vite
+  // sinon on charge le build dist
+  if (process.env.VITE_DEV_SERVER_URL) {
+    mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
+  } else {
+    mainWindow.loadFile(path.join(__dirname, 'dist', 'index.html'));
+  }
 }
 
 app.whenReady().then(() => {
