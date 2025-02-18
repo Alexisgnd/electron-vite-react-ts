@@ -1,0 +1,53 @@
+.auth-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+  
+    .auth-left {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      .auth-content {
+        width: 411px;
+        padding: 136px;
+        display: flex;
+        flex-direction: column;
+        gap: 72px;
+  
+        .auth-texts {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+  
+          p {
+            font-size: 16px;
+            color: #777;
+  
+            .inscription {
+              color: #6a40fa;
+              font-weight: bold;
+              cursor: pointer;
+            }
+          }
+  
+          h1 {
+            font-size: 24px;
+            font-weight: bold;
+          }
+        }
+  
+        .auth-form {
+          // Contenu à ajouter plus tard
+        }
+      }
+    }
+  
+    .auth-right {
+      width: 50%;
+      background: url("../assets/rectangle_auth.png") no-repeat center;
+      background-size: cover;
+    }
+  }
+  
