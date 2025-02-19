@@ -32,7 +32,7 @@ const Authentification = () => {
 
                     <button className="discord-login">
                         <div className="discord-icon" />
-                        Se connecter avec <strong>Discord</strong>
+                        Se connecter avec Discord
                     </button>
                 </div>
             </div>
