@@ -46,7 +46,7 @@
         .auth-form {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 32px;
             width: 411px;
 
             .input-container {
@@ -100,6 +100,14 @@
                     background-image: url("../assets/discord.png");
                     background-size: cover;
                 }
+
+                &:hover {
+                    background-color: #007bff;
+                    color: #fff;
+                }
+
+                transition: background-color 0.3s ease,
+                color 0.3s ease;
             }
         }
     }
