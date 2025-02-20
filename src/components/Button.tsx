@@ -8,7 +8,12 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ text, variant = "primary", onClick }) => {
-  return <button className={`button ${variant}`} onClick={onClick}>{text}</button>;
+  const handleClick = () => {
+    if (variant !== "disabled" && onClick) {
+      onClick();
+    }
+  };
+  return <button className={`button ${variant}`} onClick={handleClick}>{text}</button>;
 };
 
 export default Button;
