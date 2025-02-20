@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import "./authentification.scss";
 import Button from "../components/Button";
@@ -16,12 +16,45 @@ const Authentification = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [isEmailUsed, setIsEmailUsed] = useState(false);
 
     // Bascule entre "Connexion" et "Inscription"
     const toggleAuthMode = () => {
         setIsSignUp(!isSignUp);
         setErrorMessage(""); // Réinitialisation des erreurs
+        setIsEmailUsed(false); // Réinitialisation de l'état de l'email utilisé
     };
+
+    // Vérifie si l'email est déjà utilisé
+    const checkEmailExists = async (email: string) => {
+        const { data, error } = await supabase
+            .from('users')
+            .select('email')
+            .eq('email', email);
+
+        if (error) {
+            console.error("Erreur lors de la vérification de l'email:", error);
+            return false;
+        }
+
+        return data.length > 0;
+    };
+
+    useEffect(() => {
+        if (isSignUp && email) {
+            const timer = setTimeout(async () => {
+                const exists = await checkEmailExists(email);
+                setIsEmailUsed(exists);
+                if (exists) {
+                    setErrorMessage("Cet email existe déjà.");
+                } else {
+                    setErrorMessage("");
+                }
+            }, 500);
+
+            return () => clearTimeout(timer);
+        }
+    }, [email, isSignUp]);
 
     // Gestion de l'authentification avec Supabase
     const handleAuth = async () => {
@@ -39,6 +72,17 @@ const Authentification = () => {
             if (isSignUp) {
                 // Inscription
                 result = await supabase.auth.signUp({ email, password });
+
+                if (!result.error) {
+                    // Ajouter l'utilisateur à la table 'users'
+                    const { error: insertError } = await supabase
+                        .from('users')
+                        .insert([{ email }]);
+
+                    if (insertError) {
+                        throw insertError;
+                    }
+                }
             } else {
                 // Connexion
                 result = await supabase.auth.signInWithPassword({ email, password });
@@ -116,8 +160,8 @@ const Authentification = () => {
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
 
                     <Button
-                        text={loading ? "Inscription en cours..." : isSignUp ? "S'inscrire" : "Se connecter"}
-                        variant={loading ? "disabled" : "primary"}
+                        text={loading ? (isSignUp ? "Inscription en cours..." : "Connexion en cours...") : isSignUp ? "S'inscrire" : "Se connecter"}
+                        variant={loading || (isSignUp && isEmailUsed) ? "disabled" : "primary"}
                         onClick={handleAuth}
                     />
                 </div>
