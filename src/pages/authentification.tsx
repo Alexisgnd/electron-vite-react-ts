@@ -22,6 +22,7 @@ const Authentification = () => {
     const toggleAuthMode = () => {
         setIsSignUp(!isSignUp);
         setErrorMessage(""); // Réinitialisation des erreurs
+        setIsEmailUsed(false); // Réinitialisation de l'état de l'email utilisé
     };
 
     // Vérifie si l'email est déjà utilisé
@@ -160,7 +161,7 @@ const Authentification = () => {
 
                     <Button
                         text={loading ? (isSignUp ? "Inscription en cours..." : "Connexion en cours...") : isSignUp ? "S'inscrire" : "Se connecter"}
-                        variant={loading || isEmailUsed ? "disabled" : "primary"}
+                        variant={loading || (isSignUp && isEmailUsed) ? "disabled" : "primary"}
                         onClick={handleAuth}
                     />
                 </div>
