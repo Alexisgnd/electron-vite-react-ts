@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import "./authentification.scss";
-import Button from "../components/button";
+import Button from "../components/Button";
 import Input from "../components/input";
 
 // Initialisation de Supabase avec les variables d'environnement
