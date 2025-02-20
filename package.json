@@ -2,6 +2,8 @@
   "name": "electron-vite-react-ts",
   "version": "1.0.0",
   "main": "main.js",
+  "description": "Electron Vite React TypeScript",
+  "author": "Alexis AKA @SwtchDev",
   "scripts": {
     "dev": "concurrently \"npm:dev:react\" \"npm:dev:electron\"",
     "dev:react": "vite",
