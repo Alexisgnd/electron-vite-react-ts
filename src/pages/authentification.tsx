@@ -151,9 +151,11 @@ const Authentification = () => {
                             />
                         )}
 
-                        <div className="forgot-password">
-                            <p>Mot de passe oublié ?</p>
-                        </div>
+                        {!isSignUp && (
+                            <div className="forgot-password">
+                                <p>Mot de passe oublié ?</p>
+                            </div>
+                        )}
                     </div>
 
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
