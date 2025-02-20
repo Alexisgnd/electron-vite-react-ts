@@ -50,7 +50,14 @@ const Authentification = () => {
 
             alert(isSignUp ? "Inscription réussie !" : "Connexion réussie !");
         } catch (error) {
-            setErrorMessage((error as Error).message || "Une erreur est survenue.");
+            const errorMessage = (error as Error).message || "Une erreur est survenue.";
+            if (errorMessage.includes("Invalid login credentials")) {
+                setErrorMessage("Identifiants de connexion invalides.");
+            } else if (errorMessage.includes("Email already registered")) {
+                setErrorMessage("Email déjà enregistré.");
+            } else {
+                setErrorMessage(errorMessage);
+            }
         }
 
         setLoading(false);
