@@ -39,6 +39,17 @@ const Authentification = () => {
             if (isSignUp) {
                 // Inscription
                 result = await supabase.auth.signUp({ email, password });
+
+                if (!result.error) {
+                    // Ajouter l'utilisateur à la table 'users'
+                    const { error: insertError } = await supabase
+                        .from('users')
+                        .insert([{ email }]);
+
+                    if (insertError) {
+                        throw insertError;
+                    }
+                }
             } else {
                 // Connexion
                 result = await supabase.auth.signInWithPassword({ email, password });
