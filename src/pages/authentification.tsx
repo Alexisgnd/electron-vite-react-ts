@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import "./authentification.scss";
-import Button from "../components/Button";
+import Button from "../components/button";
+import Input from "../components/input";
 
 // Initialisation de Supabase avec les variables d'environnement
 const supabase = createClient(
@@ -126,34 +127,28 @@ const Authentification = () => {
                 {/* Formulaire d'authentification */}
                 <div className="auth-form">
                     <div className="input-container">
-                        <div className="input-field">
-                            <i className="icon user-icon"></i>
-                            <input
-                                type="email"
-                                placeholder="Email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-                        <div className="input-field">
-                            <i className="icon lock-icon"></i>
-                            <input
-                                type="password"
-                                placeholder="Mot de passe"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
+                        <Input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            iconClass="user-icon"
+                        />
+                        <Input
+                            type="password"
+                            placeholder="Mot de passe"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            iconClass="lock-icon"
+                        />
                         {isSignUp && (
-                            <div className="input-field">
-                                <i className="icon lock-icon"></i>
-                                <input
-                                    type="password"
-                                    placeholder="Confirmation de mot de passe"
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                />
-                            </div>
+                            <Input
+                                type="password"
+                                placeholder="Confirmation de mot de passe"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                iconClass="lock-icon"
+                            />
                         )}
                     </div>
 
