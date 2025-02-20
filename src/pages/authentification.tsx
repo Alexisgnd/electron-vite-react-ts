@@ -127,7 +127,7 @@ const Authentification = () => {
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
 
                     <Button
-                        text={loading ? "Inscription en cours..." : isSignUp ? "S'inscrire" : "Se connecter"}
+                        text={loading ? (isSignUp ? "Inscription en cours..." : "Connexion en cours...") : isSignUp ? "S'inscrire" : "Se connecter"}
                         variant={loading ? "disabled" : "primary"}
                         onClick={handleAuth}
                     />
