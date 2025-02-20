@@ -150,6 +150,10 @@ const Authentification = () => {
                                 iconClass="lock-icon"
                             />
                         )}
+
+                        <div className="forgot-password">
+                            <p>Mot de passe oublié ?</p>
+                        </div>
                     </div>
 
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
