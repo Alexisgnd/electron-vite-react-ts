@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
 import "./authentification.scss";
 import Button from "../components/Button";
 import Input from "../components/input";
@@ -18,6 +19,7 @@ const Authentification = () => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [isEmailUsed, setIsEmailUsed] = useState(false);
+    const navigate = useNavigate(); // Ajout de useNavigate
 
     // Bascule entre "Connexion" et "Inscription"
     const toggleAuthMode = () => {
@@ -83,6 +85,9 @@ const Authentification = () => {
                     if (insertError) {
                         throw insertError;
                     }
+
+                    // Redirection vers la page profile_init après une inscription réussie
+                    navigate('/profile_init');
                 }
             } else {
                 // Connexion

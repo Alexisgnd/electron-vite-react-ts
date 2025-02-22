@@ -1,0 +1,18 @@
+.profile-init {
+    .banner {
+      background-color: #4CAF50; /* Green background */
+      color: white; /* White text */
+      text-align: center; /* Centered text */
+      padding: 20px; /* Some padding */
+      font-size: 24px; /* Larger text */
+      width: 100%; /* Full width */
+      height: 127px; /* Height of the banner */
+      flex-shrink: 0; /* Prevent shrinking */
+  
+      img {
+        width: 100%; /* Make the image take the full width of the banner */
+        height: 100%; /* Make the image take the full height of the banner */
+        object-fit: cover; /* Ensure the image covers the banner area */
+      }
+    }
+  }
