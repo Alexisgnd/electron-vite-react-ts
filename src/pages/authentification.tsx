@@ -92,13 +92,35 @@ const Authentification = () => {
             } else {
                 // Connexion
                 result = await supabase.auth.signInWithPassword({ email, password });
+
+                if (!result.error) {
+                    // Vérifier si le champ first_name est NULL
+                    const { data, error } = await supabase
+                        .from('users')
+                        .select('first_name')
+                        .eq('email', email)
+                        .single();
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    if (data.first_name === null) {
+                        // Redirection vers la page profile_init si first_name est NULL
+                        navigate('/profile_init');
+                    } else {
+                        alert("Connexion réussie !");
+                    }
+                }
             }
 
             if (result.error) {
                 throw result.error;
             }
 
-            alert(isSignUp ? "Inscription réussie !" : "Connexion réussie !");
+            if (isSignUp) {
+                alert("Inscription réussie !");
+            }
         } catch (error) {
             const errorMessage = (error as Error).message || "Une erreur est survenue.";
             if (errorMessage.includes("Invalid login credentials")) {

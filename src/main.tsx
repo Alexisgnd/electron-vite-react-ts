@@ -12,7 +12,7 @@ createRoot(document.getElementById('root')!).render(
     <Router>
       <Routes>
         <Route path="/" element={<Authentification />} />
-        <Route path="/profile-init" element={<ProfileInit />} />
+        <Route path="/profile_init" element={<ProfileInit />} />
       </Routes>
     </Router>
   </StrictMode>,
