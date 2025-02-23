@@ -10,6 +10,9 @@ const ProfileInit: React.FC = () => {
 
     return (
         <div className="profile-init-container">
+            {/* Bannière */}
+            <div className="banner" />
+
             {/* En-tête */}
             <div className="header">
                 <h2>AVANT DE VOUS LÂCHER...</h2>
