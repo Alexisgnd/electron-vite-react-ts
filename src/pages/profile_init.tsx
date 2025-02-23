@@ -47,15 +47,19 @@ const ProfileInit: React.FC = () => {
 
                 {/* Affichage Profil */}
                 <div className="profile-preview">
+                    <div className="profile-header"></div> {/* Rectangle du haut */}
                     <div className="avatar"></div>
                     <h3>{firstName || "{Prénom}"} {lastName || "{Nom}"}</h3>
                     <p>{description || "blablablablablablablablablablablabla"}</p>
+                    <div className="profile-footer"></div> {/* Rectangle du bas */}
                 </div>
             </div>
 
             {/* Bouton */}
             <div className="button-container">
-                <Button text="Suivant" onClick={() => console.log("Étape suivante")} />
+                <Button
+                    text="Suivant"
+                    onClick={() => console.log("Étape suivante")} />
             </div>
         </div>
     );
