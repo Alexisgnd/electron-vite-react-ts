@@ -8,6 +8,8 @@ const ProfileInit: React.FC = () => {
     const [lastName, setLastName] = useState("");
     const [description, setDescription] = useState("");
 
+    const isButtonDisabled = !firstName || !lastName;
+
     return (
         <div className="profile-init-container">
             {/* Bannière */}
@@ -59,7 +61,10 @@ const ProfileInit: React.FC = () => {
             <div className="button-container">
                 <Button
                     text="Suivant"
-                    onClick={() => console.log("Étape suivante")} />
+                    onClick={() => console.log("Étape suivante")}
+                    variant="primary"
+                    disabled={isButtonDisabled}
+                />
             </div>
         </div>
     );
