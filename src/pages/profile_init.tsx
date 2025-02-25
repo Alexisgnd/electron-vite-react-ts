@@ -8,12 +8,20 @@ const ProfileInit: React.FC = () => {
     const [lastName, setLastName] = useState("");
     const [description, setDescription] = useState("");
     const [isFormVisible, setIsFormVisible] = useState(true);
+    const [isBackButtonVisible, setIsBackButtonVisible] = useState(false);
 
     const isButtonDisabled = !firstName || !lastName;
 
-    const handleButtonClick = () => {
+    const handleNextButtonClick = () => {
         setIsFormVisible(false);
+        setIsBackButtonVisible(true);
         console.log("Étape suivante");
+    };
+
+    const handleBackButtonClick = () => {
+        setIsFormVisible(true);
+        setIsBackButtonVisible(false);
+        console.log("Retour à l'étape précédente");
     };
 
     return (
@@ -63,11 +71,18 @@ const ProfileInit: React.FC = () => {
                 </div>
             </div>
 
-            {/* Bouton */}
+            {/* Boutons */}
             <div className="button-container">
+                {isBackButtonVisible && (
+                    <Button
+                        text="Précédent"
+                        onClick={handleBackButtonClick}
+                        variant="secondary"
+                    />
+                )}
                 <Button
                     text="Suivant"
-                    onClick={handleButtonClick}
+                    onClick={handleNextButtonClick}
                     variant="primary"
                     disabled={isButtonDisabled}
                 />
