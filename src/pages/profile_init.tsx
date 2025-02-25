@@ -50,7 +50,7 @@ const ProfileInit: React.FC = () => {
                     <div className="profile-header"></div> {/* Rectangle du haut */}
                     <div className="avatar"></div>
                     <h3>{firstName || "{Prénom}"} {lastName || "{Nom}"}</h3>
-                    <p>{description || "blablablablablablablablablablablabla"}</p>
+                    <p>{description}</p>
                     <div className="profile-footer"></div> {/* Rectangle du bas */}
                 </div>
             </div>
