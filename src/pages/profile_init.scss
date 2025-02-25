@@ -41,6 +41,19 @@
         flex-direction: column;
         gap: 15px;
         width: 45%;
+        transition:
+            opacity 0.5s ease,
+            transform 0.5s ease;
+    }
+
+    .form-section.hidden {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    .form-section.visible {
+        opacity: 1;
+        transform: translateX(0);
     }
 
     .profile-preview {

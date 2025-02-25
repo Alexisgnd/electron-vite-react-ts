@@ -7,8 +7,14 @@ const ProfileInit: React.FC = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [description, setDescription] = useState("");
+    const [isFormVisible, setIsFormVisible] = useState(true);
 
     const isButtonDisabled = !firstName || !lastName;
+
+    const handleButtonClick = () => {
+        setIsFormVisible(false);
+        console.log("Étape suivante");
+    };
 
     return (
         <div className="profile-init-container">
@@ -23,7 +29,7 @@ const ProfileInit: React.FC = () => {
 
             <div className="content">
                 {/* Formulaire */}
-                <div className="form-section">
+                <div className={`form-section ${isFormVisible ? "visible" : "hidden"}`}>
                     <Input
                         type="text"
                         placeholder="Votre prénom"
@@ -61,7 +67,7 @@ const ProfileInit: React.FC = () => {
             <div className="button-container">
                 <Button
                     text="Suivant"
-                    onClick={() => console.log("Étape suivante")}
+                    onClick={handleButtonClick}
                     variant="primary"
                     disabled={isButtonDisabled}
                 />
