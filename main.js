@@ -3,8 +3,11 @@ const path = require('path');
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1440,
+    height: 900,
+    fullscreen: false,
+    frame: true, // When false : Disable or not the window frame (including the toolbar)
+    autoHideMenuBar: false, // When true : Automatically hide the menu bar
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,

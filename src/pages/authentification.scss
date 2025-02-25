@@ -85,6 +85,16 @@
                         font-size: 16px;
                     }
                 }
+
+                .forgot-password {
+                    p {
+                        font-size: 14px;
+                        color: #6a40fa;
+                        font-weight: bold;
+                        cursor: pointer;
+                        text-align: right; // Added this line
+                    }
+                }
             }
 
             .discord-login {

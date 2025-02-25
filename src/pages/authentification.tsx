@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { useNavigate } from "react-router-dom";
 import "./authentification.scss";
 import Button from "../components/Button";
+import Input from "../components/input";
 
 // Initialisation de Supabase avec les variables d'environnement
 const supabase = createClient(
@@ -17,6 +19,7 @@ const Authentification = () => {
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [isEmailUsed, setIsEmailUsed] = useState(false);
+    const navigate = useNavigate(); // Ajout de useNavigate
 
     // Bascule entre "Connexion" et "Inscription"
     const toggleAuthMode = () => {
@@ -82,17 +85,42 @@ const Authentification = () => {
                     if (insertError) {
                         throw insertError;
                     }
+
+                    // Redirection vers la page profile_init après une inscription réussie
+                    navigate('/profile_init');
                 }
             } else {
                 // Connexion
                 result = await supabase.auth.signInWithPassword({ email, password });
+
+                if (!result.error) {
+                    // Vérifier si le champ first_name est NULL
+                    const { data, error } = await supabase
+                        .from('users')
+                        .select('first_name')
+                        .eq('email', email)
+                        .single();
+
+                    if (error) {
+                        throw error;
+                    }
+
+                    if (data.first_name === null) {
+                        // Redirection vers la page profile_init si first_name est NULL
+                        navigate('/profile_init');
+                    } else {
+                        alert("Connexion réussie !");
+                    }
+                }
             }
 
             if (result.error) {
                 throw result.error;
             }
 
-            alert(isSignUp ? "Inscription réussie !" : "Connexion réussie !");
+            if (isSignUp) {
+                alert("Inscription réussie !");
+            }
         } catch (error) {
             const errorMessage = (error as Error).message || "Une erreur est survenue.";
             if (errorMessage.includes("Invalid login credentials")) {
@@ -126,33 +154,33 @@ const Authentification = () => {
                 {/* Formulaire d'authentification */}
                 <div className="auth-form">
                     <div className="input-container">
-                        <div className="input-field">
-                            <i className="icon user-icon"></i>
-                            <input
-                                type="email"
-                                placeholder="Email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-                        <div className="input-field">
-                            <i className="icon lock-icon"></i>
-                            <input
-                                type="password"
-                                placeholder="Mot de passe"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
+                        <Input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            iconClass="user-icon"
+                        />
+                        <Input
+                            type="password"
+                            placeholder="Mot de passe"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            iconClass="lock-icon"
+                        />
                         {isSignUp && (
-                            <div className="input-field">
-                                <i className="icon lock-icon"></i>
-                                <input
-                                    type="password"
-                                    placeholder="Confirmation de mot de passe"
-                                    value={confirmPassword}
-                                    onChange={(e) => setConfirmPassword(e.target.value)}
-                                />
+                            <Input
+                                type="password"
+                                placeholder="Confirmation de mot de passe"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                iconClass="lock-icon"
+                            />
+                        )}
+
+                        {!isSignUp && (
+                            <div className="forgot-password">
+                                <p>Mot de passe oublié ?</p>
                             </div>
                         )}
                     </div>
