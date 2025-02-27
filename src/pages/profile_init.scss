@@ -19,12 +19,16 @@
     .header {
         text-align: center;
         margin-top: 140px;
+
         h2 {
             font-size: 24px;
             font-weight: bold;
+            margin: 16px 0;
         }
+
         p {
             color: #666;
+            margin: 0;
         }
     }
 
@@ -121,6 +125,7 @@
             font-size: 16px;
             font-weight: bold;
             gap: 10px;
+
             svg {
                 font-size: 18px;
             }
